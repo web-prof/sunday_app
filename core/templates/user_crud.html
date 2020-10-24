@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% if request.user.is_authenticated and request.user.is_staff %}
+
+{% block content %}
+<div class="ftco-blocks-cover-1">
+    <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
+    <div class="site-section-cover overlay" data-stellar-background-ratio="0"
+         style="background-image: url('{% static 'core/images/hero_1.jpg' %}');background-attachment:fixed;">
+        <div class="container">
+
+
+            <div class="row align-items-center ">
+
+                <div class="col-md-5 mt-5 pt-5">
+                    <!--              <span class="text-cursive h5 text-red">Contact</span>-->
+                    <h1 class="mb-3 font-weight-bold text-teal">لوحة المستخدمين</h1>
+                    <!--              <p><a href="index.html" class="text-white">Home</a> <span class="mx-3">/</span> <strong>Contact</strong></p>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <!--                <span class="text-cursive h5 text-red d-block">Packages You Like</span>-->
+                <!--                <h2 class="text-white">Our Packages</h2>-->
+            </div>
+        </div>
+        <div class="row mb-5 ">
+            <div class="col-md-6 text-center ">
+                {% for m in messages %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ m }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endfor %}
+
+                <form method="post">{% csrf_token %}
+                    <div class="form-group">
+                        <label for="username" style="color:black;">اسم المستخدم</label>
+
+                        <input type="text" class="form-control" id="username" name="username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1" style="color:black;">الرقم السري</label>
+                        <input name="password1" type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword2" style="color:black;">تاكيد الرقم السرى</label>
+                        <input name="password2" type="password" class="form-control" id="exampleInputPassword2">
+                    </div>
+
+                    <!--                    <div class="form-group form-check">-->
+                    <!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+                    <!--                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+                    <!--                    </div>-->
+                    <button type="submit" class="btn btn-primary py-4 btn-custom-1">اضافة مستخدم</button>
+                </form>
+            </div>
+        </div>
+        <div class="row" style="background-color:white">
+
+            <div class="table-responsive">
+
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">اسم المستخدم</th>
+                        <th scope="col">الدرجه</th>
+                        <th scope="col">مسح</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for p in prof %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ p.user.username}}</td>
+                        <td>{{ p.get_student_score }}</td>
+                        <td><a href="{% url 'core:delete_user' p.user.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+{% endif %}
