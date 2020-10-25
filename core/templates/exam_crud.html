@@ -13,13 +13,13 @@
 
             <div class="row align-items-center ">
 
-            <div class="col-md-5 mt-5 pt-5">
-<!--              <span class="text-cursive h5 text-red">Contact</span>-->
-              <h1 class="mb-3 font-weight-bold text-teal">لوحة الاسئله</h1>
-<!--              <p><a href="index.html" class="text-white">Home</a> <span class="mx-3">/</span> <strong>Contact</strong></p>-->
-            </div>
+                <div class="col-md-5 mt-5 pt-5">
+                    <!--              <span class="text-cursive h5 text-red">Contact</span>-->
+                    <h1 class="mb-3 font-weight-bold text-teal">لوحة الاسئله</h1>
+                    <!--              <p><a href="index.html" class="text-white">Home</a> <span class="mx-3">/</span> <strong>Contact</strong></p>-->
+                </div>
 
-          </div>
+            </div>
         </div>
     </div>
 </div>
@@ -27,8 +27,8 @@
     <div class="container">
         <div class="row mb-5">
             <div class="col-12 text-center">
-<!--                <span class="text-cursive h5 text-red d-block">Packages You Like</span>-->
-<!--                <h2 class="text-white">لوحة الاسئله</h2>-->
+                <!--                <span class="text-cursive h5 text-red d-block">Packages You Like</span>-->
+                <!--                <h2 class="text-white">لوحة الاسئله</h2>-->
             </div>
         </div>
         <div class="row mb-5">
@@ -43,20 +43,21 @@
                 {% endfor %}
 
                 <form method="post">{% csrf_token %}
-                    {{ exam_form|crispy  }}
-<!--                    <div class="form-group">-->
-<!--                        <label for="username" style="color:white;">اسم المستخدم</label>-->
 
-<!--                        <input type="text" class="form-control" id="username" name="username">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="exampleInputPassword1" style="color:white;">الرقم السري</label>-->
-<!--                        <input name="password1" type="password" class="form-control" id="exampleInputPassword1">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="exampleInputPassword2" style="color:white;">تاكيد الرقم السرى</label>-->
-<!--                        <input name="password2" type="password" class="form-control" id="exampleInputPassword2">-->
-<!--                    </div>-->
+                    {{ exam_form|crispy }}
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="username" style="color:white;">اسم المستخدم</label>-->
+
+                    <!--                        <input type="text" class="form-control" id="username" name="username">-->
+                    <!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="exampleInputPassword1" style="color:white;">الرقم السري</label>-->
+                    <!--                        <input name="password1" type="password" class="form-control" id="exampleInputPassword1">-->
+                    <!--                    </div>-->
+                    <!--                    <div class="form-group">-->
+                    <!--                        <label for="exampleInputPassword2" style="color:white;">تاكيد الرقم السرى</label>-->
+                    <!--                        <input name="password2" type="password" class="form-control" id="exampleInputPassword2">-->
+                    <!--                    </div>-->
 
                     <!--                    <div class="form-group form-check">-->
                     <!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
@@ -95,7 +96,6 @@
                         <td>{{ p.answer4}}</td>
                         <td>{{ p.correct_answer}}</td>
                         <td><a href="{% url 'core:delete_exam' p.id %}"><i class="fas fa-trash-alt"></i></a></td>
-
 
 
                     </tr>
