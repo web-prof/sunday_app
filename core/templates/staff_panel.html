@@ -6,8 +6,9 @@
 
 <div class="ftco-blocks-cover-1">
     <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-    <div class="site-section-cover overlay" data-stellar-background-ratio="0"
-         style="background-image: url('{% static 'core/images/hero_1.jpg' %}');background-attachment:fixed;">
+ <div class="site-section-cover overlay"
+         style="background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url('{% static 'core/images/logo.jpeg' %}');
+         background-attachment:fixed; background-position:center;" >
         <div class="container">
 
             <div class="row align-items-center ">
@@ -39,7 +40,7 @@
               <span class="img-wrap"><img src="{% static 'core/images/flaticon/svg/001-jigsaw.svg' %}" alt="Image" class="img-fluid"></span>
               <h3 class="text-teal">المخدومين</h3>
               <p>يمكنك من هنا اضافة مخدوم فى فصلك او مسحه او تعديل بياناته</p>
-              <p><a href="{% url 'core:user_crud' %}" class="btn btn-primary btn-custom-1 mt-4">قم بالدخول</a></p>
+              <p><a href="{% url 'core:user_crud' %}"  class="text-center btn-primary btn-custom-1 mt-4 p-3">قم بالدخول</a></p>
             </div>
           </div>
           <div class="col-lg-6">
@@ -47,7 +48,7 @@
               <span class="img-wrap"><img src="{% static 'core/images/flaticon/svg/002-target.svg' %}" alt="Image" class="img-fluid"></span>
               <h3 class="text-success">الاسئله</h3>
               <p>يمكنك من هنا اضافة اسئله ومسحها</p>
-              <p><a href="{% url 'core:exam_crud' %}" class="btn btn-warning btn-custom-1 mt-4">قم بالدخول</a></p>
+              <p><a href="{% url 'core:exam_crud' %}" class="text-center btn-warning btn-custom-1 mt-4 p-3">قم بالدخول</a></p>
             </div>
           </div>
 <!--          <div class="col-lg-4">-->

@@ -16,21 +16,21 @@ the_class = (
 )
 
 
-def validate_date(date):
-    if date > timezone.now().date():
-        raise ValidationError("Date cannot be in the future")
-
+# def validate_date(date):
+#     if date > timezone.now().date():
+#         raise ValidationError("Date cannot be in the future")
+#
 
 def image_upload(instance, filename):
     imagename, extension = filename.split(".")
-    return "core/%s.%s" % (instance.id, extension)
+    return "core/%s.%s" % (instance.user, extension)
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=image_upload, null=True, blank=True)
+    image = models.ImageField(upload_to='profile/', null=True, blank=True)
     p_class = models.CharField(max_length=50, choices=the_class)
-    score=models.IntegerField(default=0)
+    score = models.IntegerField(default=0)
     last_update = models.DateTimeField(auto_now_add=timezone.now(), null=True, blank=True)
 
     def __str__(self):
@@ -69,7 +69,6 @@ class Results(models.Model):
         return str(self.profile)
 
 
-
 z_class = (
     ('الصف الاول', 'الصف الاول'),
     ('الصف الثانى', 'الصف الثانى'),
@@ -90,6 +89,7 @@ class Exam(models.Model):
     answer4 = models.CharField(max_length=100)
     correct_answer = models.CharField(max_length=100)
     last_update = models.DateTimeField(auto_now_add=timezone.now(), null=True, blank=True)
+    is_published = models.BooleanField()
 
     def __str__(self):
         return self.question

@@ -1,11 +1,14 @@
 {% load static %}
 <!doctype html>
-<html lang="en">
+<html lang="en,ar">
 
 <head>
-    <title>Kiddy &mdash; Website Template by Colorlib</title>
+    <title>خدمة مدارس الاحد</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
+   <meta name='viewport'
+     content='width=device-width, initial-scale=1.0, maximum-scale=1.0,
+     user-scalable=0' >
     <!--    the_profile_css-->
     <link rel="stylesheet" href="{% static 'core/styles.css' %}">
     <link rel="stylesheet" href="{% static 'core/responsive.css' %}">
@@ -25,19 +28,22 @@
     <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
     <!--    the_bootstrap_arabic-->
     <link rel="stylesheet" href="{% static 'base2.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600&family=Changa:wght@600&display=swap"
+          rel="stylesheet">
+    <style>body{font-family: 'Cairo', sans-serif;!important}</style>
+    {% block css %}
+    {% endblock css %}
 </head>
 
+
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-
-
-<div class="site-wrap" id="home-section">
-
-
-    <header class="site-navbar site-navbar-target" role="banner">
+    <header class="site-navbar site-navbar-target" role="banner" style="z-index:98;">
         <div class="container mb-3">
             <div class="d-flex align-items-center">
                 <div class="site-logo mr-auto">
-                    <a href="#"><img src="{% static 'core/images/title_logo.png' %}" style="border-radius:20px;width:70%;"><span class="text-primary">.</span></a>
+                    <a href="#"><img src="{% static 'core/images/title_logo.png' %}"
+                                     style="border-radius:20px;width:70%;"><span class="text-primary"></span></a>
                 </div>
                 <div class="site-quick-contact d-none d-lg-flex ml-auto ">
                     <div class="d-flex site-info align-items-center mr-5">
@@ -46,7 +52,7 @@
                     </div>
                     <div class="d-flex site-info align-items-center">
                         <span class="block-icon mr-3"><span class="icon-clock-o"></span></span>
-                        <span>الجمعه من 10 ص : 1 م </span>
+                        <span>الجمعه من 10 ص : 2 م </span>
                     </div>
 
                 </div>
@@ -60,9 +66,9 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-radius:25px;">
                 <div class="navbar-brand">
                     مدارس الاحد
-<!--                    <a class="navbar-brand" target="_blank" href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:blue" class="fab fa-facebook-f"></i></a>-->
-<!--                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:green" class="fab fa-whatsapp"></i></a>-->
-<!--                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i style="color:red" class="fab fa-youtube"></i></a>-->
+                    <!--                    <a class="navbar-brand" target="_blank" href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:blue" class="fab fa-facebook-f"></i></a>-->
+                    <!--                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:green" class="fab fa-whatsapp"></i></a>-->
+                    <!--                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i style="color:red" class="fab fa-youtube"></i></a>-->
                 </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -72,42 +78,42 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
-<!--                        <li class="nav-item active">-->
-<!--                            <a class="nav-link" href="{% url 'core:log_in' %}">الرئيسيه <span-->
-<!--                                    class="sr-only">(current)</span></a>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item active">-->
+                        <!--                            <a class="nav-link" href="{% url 'core:log_in' %}">الرئيسيه <span-->
+                        <!--                                    class="sr-only">(current)</span></a>-->
+                        <!--                        </li>-->
                         {% if request.user.is_authenticated and request.user.is_staff %}
                         <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'core:user_crud' %}">لوحة المستخدمين  <span
+                            <a class="nav-link" href="{% url 'core:user_crud' %}">لوحة المستخدمين <span
                                     class="sr-only">(current)</span></a>
                         </li>
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="{% url 'core:exam_crud' %}">لوحة الاسئله  <span
+                            <a class="nav-link" href="{% url 'core:exam_crud' %}">لوحة الاسئله <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         {% endif %}
                         <li class="nav-item">
                             {% if user.is_staff %}
-<!--                            <a class="nav-link" href="{% url 'core:profile' %}">شكل صفحة المستخدم</a>-->
+                            <!--                            <a class="nav-link" href="{% url 'core:profile' %}">شكل صفحة المستخدم</a>-->
                             {% else %}
                             <a class="nav-link" href="{% url 'core:profile' %}">الصفحه الشخصيه</a>
                             {% endif %}
                         </li>
 
                         {% if request.user.is_authenticated and request.user.is_staff %}
-<!--                        <li class="nav-item dropdown">-->
-<!--                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
-<!--                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                                لوح التحكم-->
-<!--                            </a>-->
-<!--                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
-<!--                                &lt;!&ndash;                                <a class="dropdown-item" href="#">Action</a>&ndash;&gt;-->
-<!--                                <a class="dropdown-item" href="{% url 'core:user_crud' %}"> لوحة المستخدمين </a>-->
-<!--                                <div class="dropdown-divider"></div>-->
-<!--                                <a class="dropdown-item" href="{% url 'core:exam_crud' %}">لوحة الاسئله</a>-->
-<!--                            </div>-->
-<!--                        </li>-->
+                        <!--                        <li class="nav-item dropdown">-->
+                        <!--                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"-->
+                        <!--                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--                                لوح التحكم-->
+                        <!--                            </a>-->
+                        <!--                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+                        <!--                                &lt;!&ndash;                                <a class="dropdown-item" href="#">Action</a>&ndash;&gt;-->
+                        <!--                                <a class="dropdown-item" href="{% url 'core:user_crud' %}"> لوحة المستخدمين </a>-->
+                        <!--                                <div class="dropdown-divider"></div>-->
+                        <!--                                <a class="dropdown-item" href="{% url 'core:exam_crud' %}">لوحة الاسئله</a>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
                         {% endif %}
                         <!--                        <li class="nav-item">-->
                         <!--                            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
@@ -116,14 +122,18 @@
                             <a class="nav-link" href="{% url 'core:log_out' %}">تسجيل الخروج</a>
                         </li>
                     </ul>
-                    <a class="navbar-brand" target="_blank" href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:blue" class="fab fa-facebook-f"></i></a>
-                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:green" class="fab fa-whatsapp"></i></a>
-                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i style="color:red" class="fab fa-youtube"></i></a>
+                    <a class="navbar-brand" target="_blank"
+                       href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:blue"
+                                                                                         class="fab fa-facebook-f"></i></a>
+                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:green"
+                                                                                                 class="fab fa-whatsapp"></i></a>
+                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i
+                            style="color:red" class="fab fa-youtube"></i></a>
 
-<!--                    <form class="form-inline my-2 my-lg-0">-->
-<!--                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
-<!--                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
-<!--                    </form>-->
+                    <!--                    <form class="form-inline my-2 my-lg-0">-->
+                    <!--                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">-->
+                    <!--                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+                    <!--                    </form>-->
                 </div>
             </nav>
         </div>
@@ -350,14 +360,18 @@
                 <div class="col-lg-7">
                     <h2 class="footer-heading mb-4 mt-4">توصيات</h2>
                     <p class="mb-3">
-                        يرجي عدم مشاركة اسم المستخدم والرقم السري مع  احد
+                        يرجي عدم مشاركة اسم المستخدم والرقم السري مع احد
                     </p>
 
                     <h2 class="footer-heading mb-4 mt-4">التواصل الاجتماعي</h2>
 
-                    <a class="navbar-brand" target="_blank" href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:whire" class="fab fa-facebook-f"></i></a>
-                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:white" class="fab fa-whatsapp"></i></a>
-                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i style="color:white" class="fab fa-youtube"></i></a>
+                    <a class="navbar-brand" target="_blank"
+                       href="https://www.facebook.com/groups/Margerges.SundaySchool/"><i style="color:whire"
+                                                                                         class="fab fa-facebook-f"></i></a>
+                    <a class="navbar-brand" target="_blank" href="https://wa.me/201228162381"><i style="color:white"
+                                                                                                 class="fab fa-whatsapp"></i></a>
+                    <a class="navbar-brand" target="_blank" href="https://www.youtube.com/user/minasaad2012"><i
+                            style="color:white" class="fab fa-youtube"></i></a>
 
 
                     <!--                    <form action="#" class="d-flex" class="subscribe">-->
@@ -367,7 +381,7 @@
                 </div>
                 <div class="col-lg-5 ml-auto">
                     <div class="row">
-                                                {% if request.user.is_staff %}
+                        {% if request.user.is_staff %}
 
                         <div class="col-lg-6 ml-auto">
                             <h2 class="footer-heading mb-4 mt-4">لوح التحكم</h2>
@@ -377,7 +391,7 @@
                                 <li><a href="{% url 'core:exam_crud' %}">لوحة الاسئله</a></li>
                             </ul>
                         </div>
-                         {% else %}
+                        {% else %}
                         <div class="col-lg-6 ml-auto">
                             <h2 class="footer-heading mb-4 mt-4">روابط سريعه</h2>
                             <ul class="list-unstyled">
@@ -387,7 +401,7 @@
                             </ul>
 
                         </div>
-{% endif %}
+                        {% endif %}
 
                     </div>
                 </div>
@@ -425,9 +439,8 @@
 <script src="{% static 'core/js/bootstrap-datepicker.min.js' %}"></script>
 <script src="{% static 'core/js/aos.js' %}"></script>
 <script src="{% static 'core/js/main.js' %}"></script>
-<script>
-
-</script>
+{% block js %}
+{% endblock js %}
 </body>
 
 </html>

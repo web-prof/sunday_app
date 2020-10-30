@@ -6,8 +6,9 @@
 {% block content %}
 <div class="ftco-blocks-cover-1">
     <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-    <div class="site-section-cover overlay" data-stellar-background-ratio="0"
-         style="background-image: url('{% static 'core/images/hero_1.jpg' %}');background-attachment:fixed;">
+ <div class="site-section-cover overlay"
+         style="background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url('{% static 'core/images/logo.jpeg' %}');
+         background-attachment:fixed; background-position:center; height:100%;" >
         <div class="container">
 
 
@@ -25,14 +26,16 @@
 </div>
 <div class="site-section bg-light">
     <div class="container">
-        <div class="row mb-5">
+        <div class="row ">
             <div class="col-12 text-center">
                 <!--                <span class="text-cursive h5 text-red d-block">Packages You Like</span>-->
                 <!--                <h2 class="text-white">لوحة الاسئله</h2>-->
             </div>
         </div>
+
         <div class="row mb-5">
-            <div class="col-md-6 text-center">
+
+            <div class="col-md-12 text-center">
                 {% for m in messages %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     {{ m }}
@@ -41,72 +44,89 @@
                     </button>
                 </div>
                 {% endfor %}
-
                 <form method="post">{% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            {{ exam_form.question }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ exam_form.answer1 }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ exam_form.answer2 }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ exam_form.answer3 }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ exam_form.answer4 }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ exam_form.correct_answer }}
+                        </div>
+                        <button type="submit" class="text-center mx-auto btn-primary col-md-5 py-4 btn-custom-1 mb-3">اضافة سؤال</button>
 
-                    {{ exam_form|crispy }}
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="username" style="color:white;">اسم المستخدم</label>-->
+                        <!--                    <div class="form-group">-->
+                        <!--                        <label for="username" style="color:white;">اسم المستخدم</label>-->
 
-                    <!--                        <input type="text" class="form-control" id="username" name="username">-->
-                    <!--                    </div>-->
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="exampleInputPassword1" style="color:white;">الرقم السري</label>-->
-                    <!--                        <input name="password1" type="password" class="form-control" id="exampleInputPassword1">-->
-                    <!--                    </div>-->
-                    <!--                    <div class="form-group">-->
-                    <!--                        <label for="exampleInputPassword2" style="color:white;">تاكيد الرقم السرى</label>-->
-                    <!--                        <input name="password2" type="password" class="form-control" id="exampleInputPassword2">-->
-                    <!--                    </div>-->
+                        <!--                        <input type="text" class="form-control" id="username" name="username">-->
+                        <!--                    </div>-->
+                        <!--                    <div class="form-group">-->
+                        <!--                        <label for="exampleInputPassword1" style="color:white;">الرقم السري</label>-->
+                        <!--                        <input name="password1" type="password" class="form-control" id="exampleInputPassword1">-->
+                        <!--                    </div>-->
+                        <!--                    <div class="form-group">-->
+                        <!--                        <label for="exampleInputPassword2" style="color:white;">تاكيد الرقم السرى</label>-->
+                        <!--                        <input name="password2" type="password" class="form-control" id="exampleInputPassword2">-->
+                        <!--                    </div>-->
 
-                    <!--                    <div class="form-group form-check">-->
-                    <!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-                    <!--                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
-                    <!--                    </div>-->
-                    <button type="submit" class="btn btn-primary btn-block py-4 btn-custom-1">اضافة سؤال</button>
+                        <!--                    <div class="form-group form-check">-->
+                        <!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+                        <!--                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+                        <!--                    </div>-->
+                    </div>
                 </form>
             </div>
-        </div>
-        <div class="row" style="background-color:white">
+            <div class="row" style=" width:100%; background-color:white">
 
-            <div class="table-responsive">
-
-
-                <table class="table table-striped">
-                    <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">السؤال</th>
-                        <th scope="col">الاختيار الاول</th>
-                        <th scope="col">الاختيار الثاني</th>
-                        <th scope="col">الاختيار الثالث</th>
-                        <th scope="col">الاختيار الرابع</th>
-                        <th scope="col">الاختيار الصحيح</th>
-                        <th scope="col">مسح</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for p in exam %}
-                    <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
-                        <td>{{ p.question}}</td>
-                        <td>{{ p.answer1 }}</td>
-                        <td>{{ p.answer2}}</td>
-                        <td>{{ p.answer3}}</td>
-                        <td>{{ p.answer4}}</td>
-                        <td>{{ p.correct_answer}}</td>
-                        <td><a href="{% url 'core:delete_exam' p.id %}"><i class="fas fa-trash-alt"></i></a></td>
+                <div class="table-responsive">
+            <a class="text-center btn-block btn-primary py-4 btn-custom-1" href="{% url 'core:publish_questions' %}">انشر الاسئله</a>
+                    <table class="table table-striped ">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="pl-4">#</th>
+                            <th scope="col">السؤال</th>
+                            <th scope="col">الاختيار الاول</th>
+                            <th scope="col">الاختيار الثاني</th>
+                            <th scope="col">الاختيار الثالث</th>
+                            <th scope="col">الاختيار الرابع</th>
+                            <th scope="col">الاختيار الصحيح</th>
+                            <th scope="col">مسح</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for p in exam %}
+                        <tr style="{% if not p.is_published %}background:rgba(255, 215, 51,.3)!important;{% endif %}">
+                            <th scope="row" class="pl-4">{{ forloop.counter }}</th>
+                            <td>{{ p.question}}</td>
+                            <td>{{ p.answer1 }}</td>
+                            <td>{{ p.answer2}}</td>
+                            <td>{{ p.answer3}}</td>
+                            <td>{{ p.answer4}}</td>
+                            <td>{{ p.correct_answer}}</td>
+                            <td><a href="{% url 'core:delete_exam' p.id %}"><i class="fas fa-trash-alt"></i></a></td>
 
 
-                    </tr>
-                    {% endfor %}
-                    </tbody>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
 
-                </table>
+                    </table>
+
+                </div>
+
 
             </div>
-
-
         </div>
     </div>
 </div>

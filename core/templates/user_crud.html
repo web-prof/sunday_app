@@ -5,8 +5,9 @@
 {% block content %}
 <div class="ftco-blocks-cover-1">
     <!-- data-stellar-background-ratio="0.5" style="background-image: url('images/hero_1.jpg')" -->
-    <div class="site-section-cover overlay" data-stellar-background-ratio="0"
-         style="background-image: url('{% static 'core/images/hero_1.jpg' %}');background-attachment:fixed;">
+ <div class="site-section-cover overlay"
+         style="background: linear-gradient(rgba(255,255,255,.4), rgba(255,255,255,.4)), url('{% static 'core/images/logo.jpeg' %}');
+         background-attachment:fixed; background-position:center; " >
         <div class="container">
 
 
@@ -52,7 +53,7 @@
                         <input name="password1" type="password" class="form-control" id="exampleInputPassword1">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputPassword2" style="color:black;">تاكيد الرقم السرى</label>
+                        <label for="exampleInputPassword2" style="color:black; ">تاكيد الرقم السرى</label>
                         <input name="password2" type="password" class="form-control" id="exampleInputPassword2">
                     </div>
 
@@ -60,12 +61,12 @@
                     <!--                        <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
                     <!--                        <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
                     <!--                    </div>-->
-                    <button type="submit" class="btn btn-primary py-4 btn-custom-1">اضافة مستخدم</button>
+                    <button type="submit" class=" btn-primary py-4 btn-custom-1" style="padding:5%;; ">اضافة  مستخدم</button>
                 </form>
             </div>
         </div>
         <div class="row" style="background-color:white">
-
+            <a class="text-center btn-block btn-primary py-4 btn-custom-1" href="{% url 'core:export_data' %}">تصدير الى اكسل</a>
             <div class="table-responsive">
 
 
@@ -81,9 +82,9 @@
                     <tbody>
                     {% for p in prof %}
                     <tr>
-                        <th scope="row">{{ forloop.counter }}</th>
+                        <th scope="row" >{{ forloop.counter }}</th>
                         <td>{{ p.user.username}}</td>
-                        <td>{{ p.get_student_score }}</td>
+                        <td>{{ p.score }}</td>
                         <td><a href="{% url 'core:delete_user' p.user.id %}"><i class="fas fa-trash-alt"></i></a></td>
                     </tr>
                     {% endfor %}
