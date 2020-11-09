@@ -24,7 +24,7 @@ SECRET_KEY = 'u1ypc4&_#why8tar)9#-88js=spb5cud003dxw6$)amodo7vo!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','margerges.ga']
 
 # Application definition
 
@@ -87,6 +87,17 @@ DATABASES = {
     }
 
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'gogo',
+#         'USER': 'dbgogo',
+#         'PASSWORD': 'g123456789g',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -121,7 +132,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
+# LOGIN_URL='/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'CORE/static', ]
 STATIC_ROOT = BASE_DIR / 'static'

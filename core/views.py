@@ -28,6 +28,7 @@ def log_in(request):
     else:
         return render(request, 'login.html', {})
 
+
 @login_required(login_url='/')
 def log_out(request):
     auth.logout(request)
@@ -36,44 +37,55 @@ def log_out(request):
 
 @login_required(login_url='/')
 def profile(request):
-    prof = Profile.objects.get(user=request.user)
-    profs = Profile.objects.filter(p_class=prof.p_class).exclude(user__is_staff=True).exclude(score=0).order_by(
-        '-score')[0:10]
-    exam = Exam.objects.filter(t_class=prof.p_class)
-    if request.method == 'POST':
-        for m in exam:
-            if request.POST.get(m.question, ) == m.correct_answer:
-                results = Results.objects.create(
-                    profile=prof,
-                    question_ans=m.question,
-                    student_ans=request.POST.get(m.question, ),
-                    correct_ans=m.correct_answer,
-                    is_correct=True,
-                )
-                results.save()
-                prof.score += 1
-                prof.save()
-            else:
-                results = Results.objects.create(
-                    profile=prof,
-                    question_ans=m.question,
-                    student_ans=request.POST.get(m.question, ),
-                    correct_ans=m.correct_answer,
-                    is_correct=False,
-                )
-
-        return redirect('core:profile')
-
+    if request.user.is_staff:
+        return redirect('core:staff_panel')
     else:
-        results = Results.objects.filter(profile=prof)
-        # for quest in exam:
-        #     for res in results:
-        #
-    form=prof_image_form()
-    exam = Exam.objects.filter(t_class=prof.p_class, is_published=True).exclude(
-        question__in=results.values_list('question_ans', flat=True))
+        prof = Profile.objects.get(user=request.user)
+        profs = Profile.objects.filter(p_class=prof.p_class).exclude(user__is_staff=True).exclude(score=0).order_by(
+            '-score')[0:10]
+        exam = Exam.objects.filter(t_class=prof.p_class)
+        if request.method == 'POST':
+            for m in exam:
+                # if request.POST.get(m.question, )=="":
+                #  messages.info(request,"من فضلك قم بالاجابه على جميع الاسئله")
+                #  return redirect('core:profile')
+                print(request.POST.get(m.question, ))
+                if request.POST.get(m.question, ) == m.correct_answer:
+                    results = Results.objects.create(
+                        profile=prof,
+                        question_ans=m.question,
+                        student_ans=request.POST.get(m.question, ),
+                        correct_ans=m.correct_answer,
+                        is_correct=True,
+                    )
+                    results.save()
+                    prof.score += 10
+                    prof.save()
+                elif request.POST.get(m.question, ) != m.correct_answer:
+                    if request.POST.get(m.question, ) == None:
+                        prof.save()
+                    else:
+                        results = Results.objects.create(
+                            profile=prof,
+                            question_ans=m.question,
+                            student_ans=request.POST.get(m.question, ),
+                            correct_ans=m.correct_answer,
+                            is_correct=False,
+                        )
 
-    return render(request, 'profile.html', {'prof': prof, 'exam': exam, 'profs': profs,'form':form})
+            return redirect('core:profile')
+
+        else:
+            results = Results.objects.filter(profile=prof)
+            # for quest in exam:
+            #     for res in results:
+            #
+        form = prof_image_form()
+        exam = Exam.objects.filter(t_class=prof.p_class, is_published=True).exclude(
+            question__in=results.values_list('question_ans', flat=True))
+
+        return render(request, 'profile.html', {'prof': prof, 'exam': exam, 'profs': profs, 'form': form})
+
 
 @login_required(login_url='/')
 def prof_image(request):
@@ -84,12 +96,13 @@ def prof_image(request):
 
     return redirect('core:profile')
 
-@staff_member_required()
+
+@staff_member_required(login_url='/')
 def staff_panel(request):
     return render(request, 'staff_panel.html', {})
 
 
-@staff_member_required()
+@staff_member_required(login_url='/')
 def user_crud(request):
     p = Profile.objects.get(user=request.user)
     profile = Profile.objects.filter(p_class=p.p_class).exclude(user__is_staff=True).order_by('-last_update')
@@ -121,14 +134,14 @@ def user_crud(request):
         return render(request, 'user_crud.html', {'prof': profile})
 
 
-@staff_member_required()
+@staff_member_required(login_url='/')
 def delete_user(request, id):
     user = User.objects.get(id=id)
     user.delete()
     return redirect('core:user_crud')
 
 
-@staff_member_required()
+@staff_member_required(login_url='/')
 def file_load_view(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="student.xls"'
@@ -183,7 +196,7 @@ def file_load_view(request):
 #     return response
 
 
-@staff_member_required()
+@staff_member_required(login_url='/')
 def exam_crud(request):
     p = Profile.objects.get(user=request.user)
     exam = Exam.objects.filter(t_class=p.p_class).order_by('-last_update')
@@ -213,6 +226,7 @@ def exam_crud(request):
         return render(request, 'exam_crud.html', {'exam_form': exam_form, 'exam': exam})
 
 
+@staff_member_required(login_url='/')
 def publish_questions(request):
     p = Profile.objects.get(user=request.user)
     exam = Exam.objects.filter(t_class=p.p_class, is_published=False).order_by('-last_update')
@@ -222,7 +236,7 @@ def publish_questions(request):
     return redirect('core:exam_crud')
 
 
-@staff_member_required()
+@staff_member_required(login_url='/')
 def delete_exam(request, id):
     exam = Exam.objects.get(id=id)
     exam.delete()

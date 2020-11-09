@@ -94,30 +94,30 @@
 
                             <div class="col-sm-10">
                                 <div class="form-check custom-control custom-radio custom-control-inline">
-                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios1"
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="{{ q.answer1 }}+{{q.id}}"
                                            value="{{ q.answer1 }}">
-                                    <label class="form-check-label" for="gridRadios1">
+                                    <label class="form-check-label" for="{{ q.answer1 }}+{{q.id}}">
                                         {{ q.answer1 }}
                                     </label>
                                 </div>
                                 <div class="form-check  custom-control custom-radio custom-control-inline">
-                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios2"
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="{{ q.answer2 }}+{{q.id}}"
                                            value="{{ q.answer2 }}">
-                                    <label class="form-check-label" for="gridRadios2">
+                                    <label class="form-check-label" for="{{ q.answer2 }}+{{q.id}}">
                                         {{ q.answer2 }}
                                     </label>
                                 </div>
                                 <div class="form-check custom-control custom-radio custom-control-inline">
-                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios3"
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="{{ q.answer3 }}+{{q.id}}"
                                            value="{{ q.answer3 }}">
-                                    <label class="form-check-label" for="gridRadios3">
+                                    <label class="form-check-label" for="{{ q.answer3 }}+{{q.id}}">
                                         {{ q.answer3 }}
                                     </label>
                                 </div>
                                 <div class="form-check custom-control custom-radio custom-control-inline">
-                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="gridRadios4"
+                                    <input class="form-check-input" type="radio" name="{{q.question}}" id="{{ q.answer4 }}+{{q.id}}"
                                            value="{{ q.answer4 }}">
-                                    <label class="form-check-label" for="gridRadios4">
+                                    <label class="form-check-label" for="{{ q.answer4 }}+{{q.id}}">
                                         {{ q.answer4 }}
                                     </label>
                                 </div>
@@ -163,10 +163,10 @@
                             <th class="align-middle" scope="row">{{ forloop.counter }}</th>
                             <td class="align-middle">{{ p.user.username}}</td>
                             <td class="align-middle p-.1">
-                                {% if prof.image %}
-                                <img src="{{ p.image.url }}" style="border-radius:20px; width:80px; " alt="">
+                                {% if p.image %}
+                                <img src="{{ p.image.url }}" style="border-radius:20px; width:80px; max-height:100px " alt="">
                                 {% else %}
-                                <img src="{% static 'core/images/profile.jpg' %}" style="border-radius:3px; width:80px; " alt="">
+                                <img src="{% static 'core/images/profile.jpg' %}" style="border-radius:20px; width:80px; " alt="">
                                 {% endif %}
                             </td>
                             <td class="align-middle">{{ p.score }}</td>
